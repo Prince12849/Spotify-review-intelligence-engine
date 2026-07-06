@@ -1,6 +1,9 @@
-google-play-scraper
+streamlit
 pandas
+plotly
 requests
 beautifulsoup4
 tqdm
 openai
+google-play-scraper
+praw
