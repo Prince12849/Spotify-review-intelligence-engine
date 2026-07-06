@@ -1,0 +1,62 @@
+{
+  "total_reviews": 1393,
+  "sentiment_distribution": {
+    "Positive": 694,
+    "Neutral": 393,
+    "Negative": 306
+  },
+  "theme_distribution": {
+    "Other": 580,
+    "Music Discovery": 456,
+    "Recommendation Fatigue": 90,
+    "Premium": 77,
+    "Ads": 55,
+    "Playlist Issues": 43,
+    "Discover Weekly": 27,
+    "Personalization": 20,
+    "Daily Mix": 17,
+    "Performance": 10,
+    "UI/UX": 8,
+    "Algorithm": 4,
+    "Playlist Variety": 2,
+    "Algorithm Quality": 2,
+    "Search": 1,
+    "Repetitive Songs": 1
+  },
+  "top_user_goals": {
+    "Use Spotify more effectively": 580,
+    "Discover new music": 345,
+    "Improve recommendations": 111,
+    "Listen without interruptions": 103,
+    "Build playlists": 77,
+    "Evaluate or manage Premium": 77,
+    "Avoid repetitive songs": 33,
+    "Use Discover Weekly effectively": 12,
+    "Use Spotify reliably": 10,
+    "Find specific music faster": 10
+  },
+  "top_pain_points": {
+    "The user has a general Spotify experience issue.": 580,
+    "The user wants an easier way to discover music they will enjoy.": 456,
+    "The user feels Spotify recommendations have become repetitive.": 90,
+    "The user is unsure whether Premium delivers enough value.": 77,
+    "The user is frustrated by ads interrupting the listening experience.": 55,
+    "The user is frustrated by playlist or library management limitations.": 43,
+    "The user is frustrated that Discover Weekly does not match their taste.": 27,
+    "The user feels Spotify is not learning or respecting their preferences.": 20,
+    "The user feels Daily Mix playlists are not varied or useful enough.": 17,
+    "The user is frustrated by reliability or performance problems.": 10
+  },
+  "top_feature_requests": {
+    "General product improvement": 568,
+    "Better new music discovery tools": 322,
+    "Fewer and less repetitive ads": 106,
+    "More diverse recommendations": 87,
+    "Clearer Premium value and controls": 71,
+    "Better playlist controls": 61,
+    "Mood-based discovery": 54,
+    "AI discovery coach": 31,
+    "Improved search and filtering": 21,
+    "More control over Discover Weekly": 17
+  }
+}

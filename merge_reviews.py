@@ -18,8 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
 PLAY_STORE_PATH = DATA_DIR / "spotify_reviews_cleaned.csv"
+APPLE_APP_STORE_PATH = DATA_DIR / "apple_app_reviews.csv"
 REDDIT_PATH = DATA_DIR / "reddit_reviews.csv"
 SPOTIFY_COMMUNITY_PATH = DATA_DIR / "spotify_community_reviews.csv"
+YOUTUBE_PATH = DATA_DIR / "youtube_reviews.csv"
 OUTPUT_PATH = DATA_DIR / "master_reviews.csv"
 
 STANDARD_COLUMNS = ["review", "source", "rating", "date", "url"]
@@ -147,6 +149,36 @@ def standardize_spotify_community(dataframe: pd.DataFrame) -> pd.DataFrame:
     return standardized[STANDARD_COLUMNS]
 
 
+def standardize_apple_app_store(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Apple App Store reviews already follow the standard schema."""
+    required_columns = set(STANDARD_COLUMNS)
+    missing_columns = required_columns - set(dataframe.columns)
+    if missing_columns:
+        raise KeyError(
+            f"{APPLE_APP_STORE_PATH.name} is missing required columns: "
+            f"{', '.join(sorted(missing_columns))}"
+        )
+    standardized = dataframe.copy()
+    standardized["review"] = standardized["review"].map(clean_text)
+    standardized["date"] = standardized["date"].map(clean_text)
+    return standardized[STANDARD_COLUMNS]
+
+
+def standardize_youtube(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """YouTube comments already follow the standard schema."""
+    required_columns = set(STANDARD_COLUMNS)
+    missing_columns = required_columns - set(dataframe.columns)
+    if missing_columns:
+        raise KeyError(
+            f"{YOUTUBE_PATH.name} is missing required columns: "
+            f"{', '.join(sorted(missing_columns))}"
+        )
+    standardized = dataframe.copy()
+    standardized["review"] = standardized["review"].map(clean_text)
+    standardized["date"] = standardized["date"].map(clean_text)
+    return standardized[STANDARD_COLUMNS]
+
+
 def remove_duplicate_reviews(dataframe: pd.DataFrame) -> tuple[pd.DataFrame, int]:
     """Remove empty reviews and duplicate review text across all sources."""
     before = len(dataframe)
@@ -167,8 +199,10 @@ def merge_sources() -> tuple[pd.DataFrame, int]:
     """Load, standardize, merge, and deduplicate all review sources."""
     source_loaders: list[tuple[Path, Callable[[pd.DataFrame], pd.DataFrame]]] = [
         (PLAY_STORE_PATH, standardize_play_store),
+        (APPLE_APP_STORE_PATH, standardize_apple_app_store),
         (REDDIT_PATH, standardize_reddit),
         (SPOTIFY_COMMUNITY_PATH, standardize_spotify_community),
+        (YOUTUBE_PATH, standardize_youtube),
     ]
 
     standardized_frames: list[pd.DataFrame] = []

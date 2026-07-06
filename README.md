@@ -13,6 +13,7 @@ spotify-review-engine/
 |-- reddit_scraper.py
 |-- spotify_community_scraper.py
 |-- merge_reviews.py
+|-- ai_review_engine.py
 |-- base_scraper.py
 |-- requirements.txt
 |-- README.md
@@ -139,6 +140,30 @@ It removes duplicate review text and writes:
 ```text
 data/master_reviews.csv
 ```
+
+## Enrich Reviews With AI
+
+Create AI-powered review intelligence fields:
+
+```bash
+python ai_review_engine.py
+```
+
+The engine reads:
+
+```text
+data/master_reviews.csv
+```
+
+It writes:
+
+```text
+data/master_reviews_ai.csv
+output/summary.json
+```
+
+If `OPENAI_API_KEY` is set, the script uses the OpenAI API. If no API key is
+available, it automatically uses a rule-based NLP fallback.
 
 ## Output
 

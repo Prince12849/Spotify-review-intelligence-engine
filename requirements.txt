@@ -2,3 +2,5 @@ google-play-scraper
 pandas
 requests
 beautifulsoup4
+tqdm
+openai
