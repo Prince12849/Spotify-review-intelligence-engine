@@ -1,171 +1,161 @@
-# Spotify Review Intelligence Engine
+# DiscoverAI – AI-Powered Music Discovery Intelligence for Spotify
 
-Spotify Review Intelligence Engine downloads recent Android app reviews for
-Spotify, collects public Reddit discussion pages, and prepares CSV datasets for
-analysis.
+DiscoverAI is an AI-powered product research and recommendation system built to understand why Spotify users struggle with music discovery. The project combines large-scale AI review analysis with user research to identify the root cause of repetitive listening and demonstrates an AI-native MVP that recommends music based on user intent rather than listening history.
 
-## Project Structure
+---
 
-```text
+## 🚀 Live Applications
+
+### 🎵 DiscoverAI MVP
+https://discoverai-mvp.streamlit.app/
+
+### 📊 DiscoverAI Insights Dashboard
+https://discoverai-dashboard.streamlit.app/
+
+### 💻 GitHub Repository
+https://github.com/Prince12849/Spotify-review-intelligence-engine
+
+---
+
+## 📌 Problem Statement
+
+Spotify aims to increase meaningful music discovery while reducing repetitive listening behaviour. Despite having one of the world's most sophisticated recommendation systems, users continue listening to familiar artists, repeat playlists, and previously discovered tracks.
+
+This project investigates why discovery breaks before proposing an AI-native solution.
+
+---
+
+## 💡 Solution Overview
+
+### DiscoverAI Insights
+
+An AI-powered review intelligence engine that collects user feedback from multiple public sources, extracts themes and sentiment, and identifies recurring pain points through an interactive dashboard.
+
+**Sources:**
+- Google Play Store
+- Apple App Store
+- Reddit
+- Spotify Community
+- YouTube
+
+**Dataset:** 1,393 public reviews across 5 sources.
+
+---
+
+### DiscoverAI
+
+DiscoverAI is an AI-native music discovery assistant that recommends songs based on:
+
+- Mood
+- Activity
+- Preferred Language
+- Energy Level
+- Listening Intent
+
+Unlike traditional recommendation systems that rely primarily on listening history, DiscoverAI focuses on understanding **why** a user wants music in the current moment.
+
+---
+
+## 🤖 AI Workflow
+
+Google Play Reviews
+↓
+Apple App Store Reviews
+↓
+Reddit Discussions
+↓
+Spotify Community
+↓
+YouTube Comments
+↓
+Merge Reviews
+↓
+AI Review Engine
+↓
+Interactive Dashboard
+↓
+User Research
+↓
+DiscoverAI MVP
+
+---
+
+## ✨ Features
+
+- Multi-source review collection
+- AI sentiment analysis
+- Theme detection
+- Pain point extraction
+- Interactive analytics dashboard
+- AI-native recommendation engine
+- Explainable recommendations
+- Multilingual recommendations
+- Live deployment
+
+---
+
+## 🛠 Tech Stack
+
+- Python
+- Streamlit
+- Pandas
+- Plotly
+- OpenAI API (Rule-based fallback)
+- Google Play Scraper
+- PRAW (Reddit API)
+- BeautifulSoup
+- Requests
+
+---
+
+## 📂 Project Structure
+
+```
 spotify-review-engine/
-|-- scraper.py
-|-- clean_reviews.py
-|-- reddit_scraper.py
-|-- spotify_community_scraper.py
-|-- merge_reviews.py
-|-- ai_review_engine.py
-|-- base_scraper.py
-|-- requirements.txt
-|-- README.md
-|-- data/
-`-- output/
+│
+├── dashboard.py
+├── discover_ai.py
+├── ai_review_engine.py
+├── merge_reviews.py
+├── data/
+├── output/
+├── requirements.txt
+└── README.md
 ```
 
-## Setup
+---
 
-Install the required Python packages:
+## ▶️ Run Locally
 
 ```bash
 pip install -r requirements.txt
-```
 
-## Download Google Play Reviews
-
-Run the scraper from the project directory:
-
-```bash
-python scraper.py
-```
-
-The scraper downloads the latest 500 English United States reviews for the
-Spotify Android app (`com.spotify.music`) and writes them to:
-
-```text
-data/spotify_reviews.csv
-```
-
-The CSV contains:
-
-- Review text
-- Rating
-- Review date
-- Thumbs up count
-- App version
-
-If downloading reviews fails, the script prints the exact exception type and
-message, followed by likely causes such as network issues, Google Play
-availability, package lookup problems, or an unexpected Google Play response.
-
-## Clean Google Play Reviews
-
-After downloading reviews, run:
-
-```bash
-python clean_reviews.py
-```
-
-The cleaner removes duplicate rows, removes rows with empty review text, strips
-leading and trailing whitespace from reviews, and writes the result to:
-
-```text
-data/spotify_reviews_cleaned.csv
-```
-
-## Download Reddit Discussions
-
-Run the no-auth public Reddit scraper:
-
-```bash
-python reddit_scraper.py
-```
-
-The Reddit scraper searches publicly available Reddit pages for:
-
-- Spotify recommendations
-- Discover Weekly
-- Music discovery
-- Repetitive recommendations
-- Daily Mix
-
-It extracts title, body, URL, and date when available. It tries direct public
-Reddit search first, then falls back to public HTML search if direct scraping is
-blocked. It removes duplicate URLs and writes:
-
-```text
-data/reddit_reviews.csv
-```
-
-No Reddit API credentials are required.
-
-## Download Spotify Community Discussions
-
-Run the official Spotify Community scraper:
-
-```bash
-python spotify_community_scraper.py
-```
-
-The scraper targets only `https://community.spotify.com/` and searches for
-discussion pages about Discover Weekly, music discovery, recommendations, Daily
-Mix, recommendation algorithms, playlists, new music, and recommended songs. It
-extracts discussion title, body, board/category, author, date, and URL, then
-removes duplicate URLs and writes:
-
-```text
-data/spotify_community_reviews.csv
-```
-
-The scraper does not use Spotify Community's blocked search endpoint. It uses
-public search results restricted to the official Spotify Community domain, then
-visits each discovered Community discussion page to extract the data.
-
-## Merge Review Sources
-
-After the source CSV files exist, create the master dataset:
-
-```bash
 python merge_reviews.py
-```
 
-The merger standardizes Play Store, Reddit, and Spotify Community records to:
-
-- Review
-- Source
-- Rating
-- Date
-- URL
-
-It removes duplicate review text and writes:
-
-```text
-data/master_reviews.csv
-```
-
-## Enrich Reviews With AI
-
-Create AI-powered review intelligence fields:
-
-```bash
 python ai_review_engine.py
+
+streamlit run dashboard.py
+
+streamlit run discover_ai.py
 ```
 
-The engine reads:
+---
 
-```text
-data/master_reviews.csv
-```
+## 🔮 Future Improvements
 
-It writes:
+- Spotify API integration
+- LLM-powered recommendation reasoning
+- Real-time personalization
+- RAG-powered music exploration
+- Continuous learning from user feedback
 
-```text
-data/master_reviews_ai.csv
-output/summary.json
-```
+---
 
-If `OPENAI_API_KEY` is set, the script uses the OpenAI API. If no API key is
-available, it automatically uses a rule-based NLP fallback.
+## 📄 Project Deliverables
 
-## Output
-
-The `data/` directory stores raw and cleaned CSV files. The `output/` directory
-is included for future analysis artifacts, reports, and visualizations.
+- ✅ AI Review Discovery Engine
+- ✅ AI Insights Dashboard
+- ✅ User Research
+- ✅ Root Cause Analysis
+- ✅ AI-native MVP
+- ✅ Live Deployment
